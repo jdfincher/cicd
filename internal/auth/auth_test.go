@@ -26,8 +26,8 @@ func TestGetApiKey(t *testing.T) {
 	req2.Header.Set("Auth", "Authorization ApiKey")
 
 	got, err = GetAPIKey(req2.Header)
-	want = "should fail"
-	if !errors.Is(err, ErrShouldFail) {
+	want = ""
+	if !errors.Is(err, ErrNoAuthHeaderIncluded) {
 		t.Fatalf("expected: ' %v ', got: ' %v '", want, got)
 	}
 }
