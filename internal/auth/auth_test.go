@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+var ErrShouldFail = errors.New("some error message")
+
 func TestGetApiKey(t *testing.T) {
 	req, _ := http.NewRequest("GET", "http://localhost:8080", nil)
 	req.Header.Set("Authorization", "ApiKey somehashedtokenstring")
@@ -25,7 +27,7 @@ func TestGetApiKey(t *testing.T) {
 
 	got, err = GetAPIKey(req2.Header)
 	want = "should fail"
-	if !errors.Is(err, ErrNoAuthHeaderIncluded) {
+	if !errors.Is(err, ErrShouldFail) {
 		t.Fatalf("expected: ' %v ', got: ' %v '", want, got)
 	}
 }
